@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="myApp">
+
+<head>
+    <title>AngularJS Hangman</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+    <!-- load bootstrap and fontawesome via CDN -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <style>
+    html,
+    body,
+    input,
+    select,
+    textarea {
+        font-size: 1.05em;
+    }
+    </style>
+    <!-- load angular via CDN -->
+    <script src="//code.angularjs.org/1.3.0-rc.1/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Hangman</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div ng-controller="mainController">
+            <div>
+                <h3>Lives: {{ lives }}</h3>
+            </div>
+            <div>
+                <label>Please enter a letter</label>
+                <input type="text" ng-model="letter" maxlength="1" />
+                <button type="button" class="btn btn-default" ng-click="guess()">Guess</button>
+            </div>
+            <h3>Word</h3>
+            <div class="alert alert-warning">
+                {{ showBoard() }}
+            </div>
+            <h3>Guessed letters </h3>
+            <div class="alert alert-warning" ng-show="guessed.length > 0">
+                <label ng-repeat="guess in guessed">
+                    {{ guess}}
+                </label>
+            </div>
+            <h3>Missed letters </h3>
+            <div class="alert alert-danger" ng-show="missed.length > 0">
+                <label ng-repeat="miss in missed">
+                    {{miss}}
+                </label>
+            </div>
+            <div class="alert alert-warning" ng-show="won">
+                <h3>Congratulations! you won!</h3>
+                <p>The secret word was {{ word }}
+                    <button type="button" class="btn btn-default" ng-click="reset()">Play again</button>
+                </p>
+            </div>
+            <div class="alert alert-danger" ng-show="lost">
+                <h3>You loose!</h3>
+                <p>The secret word was {{ word }}
+                    <button type="button" class="btn btn-default" ng-click="reset()">Play again</button>
+                </p>
+            </div>
+            <hr />
+        </div>
+    </div>
+</body>
+
+</html>
